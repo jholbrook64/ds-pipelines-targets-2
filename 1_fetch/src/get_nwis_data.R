@@ -1,21 +1,48 @@
+## ---------------------------
+##
+## Script name: getnwis data
+##
+## Purpose of script:
+##
+## Author: Jack Holbrook (USGS)
+##
+## ---------------------------
+## Notes:
+##     ~  this holds 2 separate functions
+## ---------------------------
 
-download_nwis_data <- function(site_nums = c("01427207", "01432160", "01435000", "01436690", "01466500")){
-  
+
+# 1st function
+download_nwis_data <- function(site_nums = c("01427207", "01432160", "01435000", "01436690", "01466500"), parameterCd = '00010') # c("01432160", "01436690") 
+{
   # create the file names that are needed for download_nwis_site_data
   # tempdir() creates a temporary directory that is wiped out when you start a new R session; 
   # replace tempdir() with "1_fetch/out" or another desired folder if you want to retain the download
+  # old :       download_files <- file.path(tempdir(), paste0('nwis_', site_nums, '_data.csv'))
+  # new:
   download_files <- file.path(tempdir(), paste0('nwis_', site_nums, '_data.csv'))
-  data_out <- data.frame()
+  browser()
+  data_out <- data.frame(agency_cd = c(), site_no = c(), dateTime = c(),
+                         X_00010_00000 = c(), X00010_00000_cd = c(), tz_cd = c())
   # loop through files to download 
+  
+  
+  
   for (download_file in download_files){
-    download_nwis_site_data(download_file, parameterCd = '00010')
+    download_nwis_site_data(download_file, parameterCd =  parameterCd)
     # read the downloaded data and append it to the existing data.frame
-    these_data <- read_csv(download_file, col_types = 'ccTdcc')
+    
+    these_data <- read_csv(download_file, col_types = 'ccTdcc')                  # set the return inside here
     data_out <- bind_rows(data_out, these_data)
+    
+    # returning each csv separatlry
+    #return(data_out)
   }
   return(data_out)
 }
 
+
+# 2nd function
 nwis_site_info <- function(fileout, site_data){
   site_no <- unique(site_data$site_no)
   site_info <- dataRetrieval::readNWISsite(site_no)
@@ -24,6 +51,7 @@ nwis_site_info <- function(fileout, site_data){
 }
 
 
+# rd funciton
 download_nwis_site_data <- function(filepath, parameterCd = '00010', startDate="2014-05-01", endDate="2015-05-01"){
   
   # filepaths look something like directory/nwis_01432160_data.csv,
