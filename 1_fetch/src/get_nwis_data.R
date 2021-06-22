@@ -93,7 +93,8 @@ download_nwis_site_data <- function(filepath, parameterCd = '00010', startDate="
     # data_out <- readNWISdata(sites=site_num, service="iv", 
     #                          parameterCd = parameterCd, startDate = startDate, endDate = endDate)
     # write_csv(data_out, file = filepath)
-    return(filepath)
+    data_out <- read_csv(file.path("1_fetch/out", paste0('nwis_', site_num, '_data.csv')))
+    return(data_out)
   }
   else {
     data_out <- readNWISdata(sites=site_num, service="iv", 
@@ -105,7 +106,7 @@ download_nwis_site_data <- function(filepath, parameterCd = '00010', startDate="
     }
     # -- end of do-not-edit block
     write_csv(data_out, file = filepath)
-    return(filepath)
+    return(data_out)
   }
   
 }

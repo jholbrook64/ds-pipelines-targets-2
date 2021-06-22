@@ -24,31 +24,31 @@ tar_target(
   site_data,
   download_nwis_data(site_nums = site_nums),       # where this function is now focused on getting the site_data, I think this function needs to be called first
 ), 
-tar_target(
-  nwis_01427207_data_csv,
-  download_nwis_site_data(filepath = '1_fetch/out/nwis_01427207_data.csv'),
-  format = "file"
-),
-tar_target(
-  nwis_01432160_data_csv,
-  download_nwis_site_data(filepath = '1_fetch/out/nwis_01432160_data.csv'),
-  format = "file"
-),
-tar_target(
-  nwis_01435000_data_csv,
-  download_nwis_site_data(filepath = '1_fetch/out/nwis_01435000_data.csv'),
-  format = "file"
-),
-tar_target(
-  nwis_01436690_data_csv,
-  download_nwis_site_data(filepath = '1_fetch/out/nwis_01427207_data.csv'),
-  format = "file"
-  ),
-tar_target(
-  nwis_01466500_data_csv,
-  download_nwis_site_data(filepath = '1_fetch/out/nwis_01466500_data.csv'),
-  format = "file"
-  ),                                                # site_data is the concatenatd dataframe of the seperate csv files, should get this to return
+# tar_target(
+#   nwis_01427207_data_csv,
+#   download_nwis_site_data(filepath = '1_fetch/out/nwis_01427207_data.csv'),
+#   format = "file"
+# ),
+# tar_target(
+#   nwis_01432160_data_csv,
+#   download_nwis_site_data(filepath = '1_fetch/out/nwis_01432160_data.csv'),
+#   format = "file"
+# ),
+# tar_target(
+#   nwis_01435000_data_csv,
+#   download_nwis_site_data(filepath = '1_fetch/out/nwis_01435000_data.csv'),
+#   format = "file"
+# ),
+# tar_target(
+#   nwis_01436690_data_csv,
+#   download_nwis_site_data(filepath = '1_fetch/out/nwis_01427207_data.csv'),
+#   format = "file"
+#   ),
+# tar_target(
+#   nwis_01466500_data_csv,
+#   download_nwis_site_data(filepath = '1_fetch/out/nwis_01466500_data.csv'),
+#   format = "file"
+#   ),                                                # site_data is the concatenatd dataframe of the seperate csv files, should get this to return
 tar_target(
   site_info_csv,
   nwis_site_info(fileout = "1_fetch/out/site_info.csv", site_data),
