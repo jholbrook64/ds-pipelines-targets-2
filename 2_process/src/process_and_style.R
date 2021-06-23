@@ -1,3 +1,5 @@
+#library(Rcpp)
+
 process_data <- function(nwis_data)
   {
   nwis_data_clean <- rename(nwis_data, water_temperature = X_00010_00000) %>% 
@@ -5,6 +7,10 @@ process_data <- function(nwis_data)
   
   return(nwis_data_clean)
 }
+
+# cppFunction('Dataframe get_annotatedData(Dataframe site_data_clean, string site_filename){
+#   
+# }')
 
 annotate_data <- function(site_data_clean, site_filename)
   {

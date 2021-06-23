@@ -44,19 +44,43 @@ tar_target(
   download_nwis_site_data(filepath = '1_fetch/out/nwis_01466500_data.csv'),
   format = "file"
   ),
+
+  ##### changing this portion to allow return type of object
+ 
+# tar_target(                   # to enable these, change the return type of download_nwis_site_data
+#   nwis_01427207_data,
+#   download_nwis_site_data(filepath = '1_fetch/out/nwis_01427207_data.csv'),
+# ),
+# tar_target(
+#   nwis_01432160_data,
+#   download_nwis_site_data(filepath = '1_fetch/out/nwis_01432160_data.csv'),
+# ),
+# tar_target(
+#   nwis_01435000_data,
+#   download_nwis_site_data(filepath = '1_fetch/out/nwis_01435000_data.csv'),
+# ),
+# tar_target(
+#   nwis_01436690_data,
+#   download_nwis_site_data(filepath = '1_fetch/out/nwis_01436690_data.csv'),
+# ),
+# tar_target(
+#   nwis_01466500_data,
+#   download_nwis_site_data(filepath = '1_fetch/out/nwis_01466500_data.csv'),
+# ),
+
+  #####
+
 tar_target(
   site_data,
-  download_nwis_data(site_nums = site_nums),       # where this function is now focused on getting the site_data, I think this function needs to be called first
-), 
+  concat_nwis_data(site_nums = site_nums), 
+  ),
 # site_data is the concatenatd dataframe of the seperate csv files, should get this to return
 tar_target(
   site_info_csv,
   nwis_site_info(fileout = "1_fetch/out/site_info.csv", site_data),
   format = "file"
+    )
   )
-  
-)
-
 
 
 p2_targets_list <- list(

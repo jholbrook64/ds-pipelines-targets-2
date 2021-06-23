@@ -13,7 +13,7 @@
 
 
 # 1st funciton
-download_nwis_data <- function(site_nums, parameterCd = '00010')  
+concat_nwis_data <- function(site_nums, parameterCd = '00010')  
 {
   repoFiles <- file.path("1_fetch/out", paste0('nwis_', site_nums, '_data.csv'))
   browser()
@@ -56,6 +56,7 @@ download_nwis_site_data <- function(filepath, parameterCd = '00010', startDate="
   
   write_csv(data_out, file = filepath)
   return(filepath)
+  #return(data_out)
   
 }
 
