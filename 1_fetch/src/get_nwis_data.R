@@ -21,7 +21,6 @@ download_nwis_data <- function(site_nums, parameterCd = '00010')
                          X_00010_00000 = c(), X00010_00000_cd = c(), tz_cd = c())
   for (data in repoFiles)
   {
-    download_nwis_site_data(data, parameterCd = '00010')
     these_data <- read_csv(data, col_types = 'ccTdcc')      
     data_out <- bind_rows(data_out, these_data)        # all this should do is append for each iteration
   }
@@ -45,10 +44,6 @@ download_nwis_site_data <- function(filepath, parameterCd = '00010', startDate="
   {  
   site_num <- basename(filepath) %>% 
     stringr::str_extract(pattern = "(?:[0-9]+)")  # this gets the number from the csv identifier
-    
-  # while (nrow(data_out < 1)) {
-  # 
-  # trycatch()
     
   data_out <- readNWISdata(sites=site_num, service="iv", 
                              parameterCd = parameterCd, startDate = startDate, endDate = endDate)
