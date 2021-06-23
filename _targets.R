@@ -2,7 +2,7 @@ library(targets)
 source("1_fetch/src/get_nwis_data.R")
 source("2_process/src/process_and_style.R")
 source("3_visualize/src/plot_timeseries.R")
-tar_option_set(debug = "site_data")
+#tar_option_set(debug = "site_data")
 
 options(tidyverse.quiet = TRUE)
 tar_option_set(packages = c("tidyverse", "dataRetrieval")) # Loading tidyverse because we need dplyr, ggplot2, readr, stringr, and purrr
