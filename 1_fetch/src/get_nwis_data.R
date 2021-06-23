@@ -16,7 +16,6 @@
 concat_nwis_data <- function(site_nums, parameterCd = '00010')  
 {
   repoFiles <- file.path("1_fetch/out", paste0('nwis_', site_nums, '_data.csv'))
-  browser()
   data_out <- data.frame(agency_cd = c(), site_no = c(), dateTime = c(),           
                          X_00010_00000 = c(), X00010_00000_cd = c(), tz_cd = c())
   for (data in repoFiles)

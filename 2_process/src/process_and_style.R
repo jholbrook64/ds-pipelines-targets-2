@@ -8,14 +8,19 @@ process_data <- function(nwis_data)
   return(nwis_data_clean)
 }
 
-# cppFunction('Dataframe get_annotatedData(Dataframe site_data_clean, string site_filename){
-#   
+# Rcpp::sourceCpp(code='
+# #include <Rcpp.h>
+# using namespace Rcpp;
+# 
+# // [[Rcpp::export]]
+# DataFrame left_joinCpp(DataFrame site_data_clean, DataFrame site_info, Function left_join) {
+# return(left_joinCpp(site_data_clean, DataFrame site_info, "site_no"));
 # }')
 
 annotate_data <- function(site_data_clean, site_filename)
   {
   site_info <- read_csv(site_filename)
-  annotated_data <- left_join(site_data_clean, site_info, by = "site_no") %>% 
+  annotated_data <- left_join(site_data_clean, site_info, "site_no") %>% 
     select(station_name = station_nm, site_no, dateTime, water_temperature, latitude = dec_lat_va, longitude = dec_long_va)
   
   return(annotated_data)
