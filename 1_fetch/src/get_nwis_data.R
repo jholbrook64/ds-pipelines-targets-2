@@ -13,18 +13,20 @@
 
 
 # 1st funciton
-concat_nwis_data <- function(site_nums, parameterCd = '00010')  
-{
-  repoFiles <- file.path("1_fetch/out", paste0('nwis_', site_nums, '_data.csv'))
-  data_out <- data.frame(agency_cd = c(), site_no = c(), dateTime = c(),           
-                         X_00010_00000 = c(), X00010_00000_cd = c(), tz_cd = c())
-  for (data in repoFiles)
-  {
-    these_data <- read_csv(data, col_types = 'ccTdcc')      
-    data_out <- bind_rows(data_out, these_data)        # all this should do is append for each iteration
-  }
-  return(data_out)
-}
+
+
+# concat_nwis_data <- function(site_nums, parameterCd = '00010')  
+# {
+#   repoFiles <- file.path("1_fetch/out", paste0('nwis_', site_nums, '_data.csv'))
+#   data_out <- data.frame(agency_cd = c(), site_no = c(), dateTime = c(),           
+#                          X_00010_00000 = c(), X00010_00000_cd = c(), tz_cd = c())
+#   for (data in repoFiles)
+#   {
+#     these_data <- read_csv(data, col_types = 'ccTdcc')      
+#     data_out <- bind_rows(data_out, these_data)        # all this should do is append for each iteration
+#   }
+#   return(data_out)
+# }
 
 
 nwis_site_info <- function(fileout, site_data)
@@ -54,8 +56,8 @@ download_nwis_site_data <- function(filepath, parameterCd = '00010', startDate="
   # -- end of do-not-edit block
   
   write_csv(data_out, file = filepath)
-  return(filepath)
-  #return(data_out)
+  #return(filepath)
+  return(data_out)    # returns object instead
   
 }
 
